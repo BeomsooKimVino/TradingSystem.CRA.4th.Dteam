@@ -1,16 +1,13 @@
 #include <iostream>
 #include <string>
-#include "IBroker.h"
+#include "IStockerDriver.h"
 
 using namespace std;
 
 class AutoTradingSystem {
 public:
-	void selectStockBrocker(string type) {
-		if (type == "Kiwer")
-			broker = new KiwerBroker();
-		else if (type == "Nemo")
-			broker = new NemoBroker();
+	void selectStockBrocker(IStockerDriver* driver) {
+		stockDriver = driver;
 	}
 
 	void login() {
@@ -35,7 +32,7 @@ public:
 
 		for (int checkCnt = 0; checkCnt < MAX_BUY_CECHK_COUNT; checkCnt++)
 		{
-			int currentPrice = broker->currentPrice(stockCode);
+			int currentPrice = stockDriver->GetPrice(stockCode);
 			if (prevPrice < currentPrice) {
 				climbCount = 0;
 				continue;
@@ -44,7 +41,7 @@ public:
 			climbCount++;
 			if (climbCount > MAX_BUY_CLIMB_COUNT)
 			{
-				broker->buy(stockCode, price / currentPrice, currentPrice);
+				stockDriver->Buy(stockCode, price / currentPrice, currentPrice);
 			}
 			prevPrice = currentPrice;
 		}
@@ -55,7 +52,7 @@ public:
 	}
 
 private:
-	IBroker* broker;
+	IStockerDriver* stockDriver;
 
 	const int MAX_BUY_CECHK_COUNT = 24;
 	const int MAX_BUY_CLIMB_COUNT = 3;
