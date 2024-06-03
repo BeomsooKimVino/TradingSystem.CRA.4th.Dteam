@@ -5,6 +5,7 @@
 
 #include "../20240603_TradingSystem/KiwerAPI.cpp"
 #include "../20240603_TradingSystem/NemoAPI.cpp"
+#include "../20240603_TradingSystem/AutoTradingSystem.cpp"
 
 using namespace testing;
 using namespace std;
