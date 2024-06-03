@@ -15,5 +15,5 @@ void KiwerDriver::Sell(string stockCode, int price, int count) {
 }
 
 int KiwerDriver::GetPrice(string stockCode) {
-	kiwerAPI.currentPrice(stockCode);
+	return kiwerAPI.currentPrice(stockCode);
 }

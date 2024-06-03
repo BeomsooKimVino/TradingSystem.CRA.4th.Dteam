@@ -19,7 +19,7 @@ public:
 	}
 
 	int currentPrice(string stockCode) {
-		srand(time(NULL));
+		srand(static_cast<int>(time(NULL)));
 		int ret = rand() % 10 * 100 + 5000;
 		return ret;
 	}

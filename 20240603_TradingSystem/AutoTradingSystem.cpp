@@ -11,20 +11,20 @@ public:
 		stockDriver = driver;
 	}
 
-	void login() {
+	void login(string id, string pw) {
 
 	}
 
-	void buy() {
+	void buy(string stockCode, int price, int amount) {
 
 	}
 
-	void sell() {
+	void sell(string stockCode, int price, int amount) {
 
 	}
 
-	int getPrice() {
-
+	int getPrice(string stockCode) {
+		return 0;
 	}
 
 	void buyNiceTiming(string stockCode, int price) {
@@ -48,7 +48,7 @@ public:
 		}
 	}
 
-	void sellNiceTiming() {	
+	void sellNiceTiming(string stockCode, int amount) {
 		
 	}
 
