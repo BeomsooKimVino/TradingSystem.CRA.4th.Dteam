@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <windows.h>
 #include "IStockerDriver.h"
 
 using namespace std;
@@ -10,20 +11,20 @@ public:
 		stockDriver = driver;
 	}
 
-	void login() {
-
+	void login(string ID, string password) {
+		stockDriver->Login(ID, password);
 	}
 
-	void buy() {
-
+	void buy(string stockCode, int price, int amount) {
+		stockDriver->Buy(stockCode, price, amount);
 	}
 
-	void sell() {
-
+	void sell(string stockCode, int price, int amount) {
+		stockDriver->Sell(stockCode, price, amount);
 	}
 
-	int getPrice() {
-
+	int getPrice(string stockCode) {
+		return stockDriver->GetPrice(stockCode);
 	}
 
 	void buyNiceTiming(string stockCode, int price) {
@@ -47,8 +48,19 @@ public:
 		}
 	}
 
-	void sellNiceTiming() {	
-		
+	void sellNiceTiming(string stockCode, int quantity) {
+		int prevPrice;
+		int currentPrice;
+
+		while (1) {
+			prevPrice = stockDriver->GetPrice(stockCode);
+			Sleep(1);
+			currentPrice = stockDriver->GetPrice(stockCode);
+			if (prevPrice > currentPrice) {
+				stockDriver->Sell(stockCode, currentPrice, quantity);
+				break;
+			}
+		}
 	}
 
 private:
