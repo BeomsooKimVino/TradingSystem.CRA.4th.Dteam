@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include "../20240603_TradingSystem/IStockerDriver.h"
 #include "../20240603_TradingSystem/KiwerAPI.cpp"
 #include "../20240603_TradingSystem/NemoAPI.cpp"
 
@@ -30,36 +31,35 @@ public:
 	MOCK_METHOD(int, GetPrice, (string stockCode), (override));
 };
 
-
 class TradingSystemFixture : public testing::Test {
 public:
     MockDriver mock;
-	TradingSystemFixture ats{ &mock };
+//	TradingSystem ats{ &mock };
 };
 
 TEST_F(TradingSystemFixture, TestLogin1) {
-	EXPECT_CALL(ats, Login).Times(1);
-	ats.login("ID", "PASSWORD");
+	EXPECT_CALL(mock, Login).Times(1);
+	mock.Login("ID", "PASSWORD");
 }
 
 TEST_F(TradingSystemFixture, TestBuy1) {
 	int price = 10000;
 	int amount = 100;
-	EXPECT_CALL(ats, Buy).Times(1);
-	ats.Buy("STOCKCODE", price, amount);
+	EXPECT_CALL(mock, Buy).Times(1);
+	mock.Buy("STOCKCODE", price, amount);
 }
 
 TEST_F(TradingSystemFixture, TestSell1) {
 	int price = 10000;
 	int amount = 100;
-	EXPECT_CALL(ats, Sell).Times(1);
-	ats.Sell("STOCKCODE", price, amount);
+	EXPECT_CALL(mock, Sell).Times(1);
+	mock.Sell("STOCKCODE", price, amount);
 }
 
 TEST_F(TradingSystemFixture, TestGetPrice10000) {
 	int price = 10000;
-	EXPECT_CALL(ats, GetPrice).Times(1).WillRepeatedly(Return(price));
-	int result = ats.GetPrice("STOCKCODE");
+	EXPECT_CALL(mock, GetPrice).Times(1).WillRepeatedly(Return(price));
+	int result = mock.GetPrice("STOCKCODE");
 
 	EXPECT_THAT(result, testing::Eq(price));
 }
