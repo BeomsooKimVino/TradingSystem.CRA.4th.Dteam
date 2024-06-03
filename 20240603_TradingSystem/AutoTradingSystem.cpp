@@ -6,6 +6,7 @@ using namespace std;
 
 class AutoTradingSystem {
 public:
+
 	void selectStockBrocker(IStockerDriver* driver) {
 		stockDriver = driver;
 	}

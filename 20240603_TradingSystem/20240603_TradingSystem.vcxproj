@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="KiwerAPI.cpp" />
+    <ClCompile Include="KiwerDriver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NemoAPI.cpp" />
     <ClCompile Include="NemoStockerDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IStockerDriver.h" />
+    <ClInclude Include="KiwerDriver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
