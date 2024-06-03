@@ -62,6 +62,3 @@ TEST_F(TradingSystemFixture, TestGetPrice10000) {
 
 	EXPECT_THAT(result, testing::Eq(price));
 }
-
-
-
