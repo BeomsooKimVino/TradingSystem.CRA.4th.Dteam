@@ -40,7 +40,7 @@ public:
 
 TEST_F(TradingSystemFixture, TestLogin1) {
 	EXPECT_CALL(mockdriver, Login).Times(1);
-	mockdriver.login("ID", "PASSWORD");
+	mockdriver.Login("ID", "PASSWORD");
 }
 
 TEST_F(TradingSystemFixture, TestBuy1) {
@@ -66,7 +66,7 @@ TEST_F(TradingSystemFixture, TestGetPrice10000) {
 }
 
 TEST_F(TradingSystemFixture, TestAtsLogin) {
-	EXPECT_CALL(mockdriver, login).Times(1));	
+	EXPECT_CALL(mockdriver, Login).Times(1);	
 
 	ats.selectStockBrocker(&mockdriver);
 	ats.login("ID", "PASSWORD");
@@ -76,7 +76,7 @@ TEST_F(TradingSystemFixture, TestAtsBuy) {
 	int price = 10000;
 	int amount = 100;
 
-	EXPECT_CALL(mockdriver, Buy).Times(1));
+	EXPECT_CALL(mockdriver, Buy).Times(1);
 
 	ats.selectStockBrocker(&mockdriver);
 	ats.buy("STOCKCODE", price, amount);
@@ -86,7 +86,7 @@ TEST_F(TradingSystemFixture, TestAtsSell) {
 	int price = 10000;
 	int amount = 100;
 
-	EXPECT_CALL(mockdriver, Sell).Times(1));
+	EXPECT_CALL(mockdriver, Sell).Times(1);
 
 	ats.selectStockBrocker(&mockdriver);
 	ats.sell("STOCKCODE", price, amount);
@@ -96,7 +96,7 @@ TEST_F(TradingSystemFixture, TestAtsGetPrice10000) {
 	int price = 10000;
 	int amount = 100;
 
-	EXPECT_CALL(mockdriver, GetPrice).Times(1)).WillRepeatedly(Return(price));;
+	EXPECT_CALL(mockdriver, GetPrice).Times(1).WillRepeatedly(Return(price));;
 
 	ats.selectStockBrocker(&mockdriver);
 	int result = ats.getPrice("STOCKCODE");
@@ -108,7 +108,7 @@ TEST_F(TradingSystemFixture, TestAtsbuyNiceTiming) {
 	int price = 10000;
 	int goalPrice = 10300;
 
-	EXPECT_CALL(mockdriver, GetPrice).Times(3)).WillOnce(Return(price + 100)).WillOnce(Return(price + 200)).WillOnce(Return(goalPrice));
+	EXPECT_CALL(mockdriver, GetPrice).Times(3).WillOnce(Return(price + 100)).WillOnce(Return(price + 200)).WillOnce(Return(goalPrice));
 
 	ats.selectStockBrocker(&mockdriver);
 	ats.buyNiceTiming("STOCKCODE", goalPrice);
@@ -118,7 +118,7 @@ TEST_F(TradingSystemFixture, TestAtsSellNiceTiming) {
 	int price = 10300;
 	int amount = 100;
 
-	EXPECT_CALL(mockdriver, GetPrice).Times(3)).WillOnce(Return(price - 100)).WillOnce(Return(price - 200)).WillOnce(Return(price - 300));
+	EXPECT_CALL(mockdriver, GetPrice).Times(3).WillOnce(Return(price - 100)).WillOnce(Return(price - 200)).WillOnce(Return(price - 300));
 
 	ats.selectStockBrocker(&mockdriver);
 	ats.sellNiceTiming("STOCKCODE", amount);
