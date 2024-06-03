@@ -3,6 +3,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include "../20240603_TradingSystem/IStockerDriver.h"
 #include "../20240603_TradingSystem/KiwerAPI.cpp"
 #include "../20240603_TradingSystem/NemoAPI.cpp"
 #include "../20240603_TradingSystem/AutoTradingSystem.cpp"
@@ -30,7 +31,6 @@ public:
 	MOCK_METHOD(void, Sell, (string stockCode, int price, int amount), (override));
 	MOCK_METHOD(int, GetPrice, (string stockCode), (override));
 };
-
 
 class TradingSystemFixture : public testing::Test {
 public:
