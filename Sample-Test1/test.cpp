@@ -33,36 +33,32 @@ public:
 
 class TradingSystemFixture : public testing::Test {
 public:
-    MockDriver mock;
-	TradingSystemFixture ats{ &mock };
+    MockDriver mockdriver;
 };
 
 TEST_F(TradingSystemFixture, TestLogin1) {
-	EXPECT_CALL(ats, Login).Times(1);
-	ats.login("ID", "PASSWORD");
+	EXPECT_CALL(mockdriver, Login).Times(1);
+	mockdriver.login("ID", "PASSWORD");
 }
 
 TEST_F(TradingSystemFixture, TestBuy1) {
 	int price = 10000;
 	int amount = 100;
-	EXPECT_CALL(ats, Buy).Times(1);
-	ats.Buy("STOCKCODE", price, amount);
+	EXPECT_CALL(mockdriver, Buy).Times(1);
+	mockdriver.Buy("STOCKCODE", price, amount);
 }
 
 TEST_F(TradingSystemFixture, TestSell1) {
 	int price = 10000;
 	int amount = 100;
-	EXPECT_CALL(ats, Sell).Times(1);
-	ats.Sell("STOCKCODE", price, amount);
+	EXPECT_CALL(mockdriver, Sell).Times(1);
+	mockdriver.Sell("STOCKCODE", price, amount);
 }
 
 TEST_F(TradingSystemFixture, TestGetPrice10000) {
 	int price = 10000;
-	EXPECT_CALL(ats, GetPrice).Times(1).WillRepeatedly(Return(price));
-	int result = ats.GetPrice("STOCKCODE");
+	EXPECT_CALL(mockdriver, GetPrice).Times(1).WillRepeatedly(Return(price));
+	int result = mockdriver.GetPrice("STOCKCODE");
 
 	EXPECT_THAT(result, testing::Eq(price));
 }
-
-
-
