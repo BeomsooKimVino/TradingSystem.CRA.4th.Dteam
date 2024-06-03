@@ -13,7 +13,7 @@ using namespace std;
 
 /*
 * Kiwer APIs
- 	void login(string ID, string password)
+	void login(string ID, string password)
 	void buy(string stockCode, int count, int price)
 	void sell(string stockCode, int count, int price)
 	int currentPrice(string stockCode)
@@ -34,7 +34,7 @@ public:
 
 class TradingSystemFixture : public testing::Test {
 public:
-    MockDriver mockdriver;
+	MockDriver mockdriver;
 	AutoTradingSystem ats;
 };
 
@@ -62,7 +62,7 @@ TEST_F(TradingSystemFixture, TestGetPrice10000) {
 	EXPECT_CALL(mockdriver, GetPrice).Times(1).WillRepeatedly(Return(price));
 	int result = mockdriver.GetPrice("STOCKCODE");
 
-	EXPECT_THAT(result, testing::Eq(price));
+		EXPECT_THAT(result, testing::Eq(price));
 }
 
 TEST_F(TradingSystemFixture, TestAtsLogin) {
