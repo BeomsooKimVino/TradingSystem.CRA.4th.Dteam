@@ -130,6 +130,7 @@
     <ClCompile Include="KiwerAPI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NemoAPI.cpp" />
+    <ClCompile Include="NemoStockerDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IStockerDriver.h" />
