@@ -79,7 +79,7 @@ TEST_F(TradingSystemFixture, TestAtsBuy) {
 	EXPECT_CALL(mockdriver, Buy).Times(1));
 
 	ats.selectStockBrocker(&mockdriver);
-	ats.Buy("STOCKCODE", price, amount);
+	ats.buy("STOCKCODE", price, amount);
 }
 
 TEST_F(TradingSystemFixture, TestAtsSell) {
@@ -89,7 +89,7 @@ TEST_F(TradingSystemFixture, TestAtsSell) {
 	EXPECT_CALL(mockdriver, Sell).Times(1));
 
 	ats.selectStockBrocker(&mockdriver);
-	ats.Sell("STOCKCODE", price, amount);
+	ats.sell("STOCKCODE", price, amount);
 }
 
 TEST_F(TradingSystemFixture, TestAtsGetPrice10000) {
@@ -99,7 +99,7 @@ TEST_F(TradingSystemFixture, TestAtsGetPrice10000) {
 	EXPECT_CALL(mockdriver, GetPrice).Times(1)).WillRepeatedly(Return(price));;
 
 	ats.selectStockBrocker(&mockdriver);
-	int result = ats.GetPrice("STOCKCODE");
+	int result = ats.getPrice("STOCKCODE");
 
 	EXPECT_THAT(result, testing::Eq(price));
 }
