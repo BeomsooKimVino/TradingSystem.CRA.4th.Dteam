@@ -96,7 +96,7 @@ TEST_F(TradingSystemFixture, TestAtsGetPrice10000) {
 	int price = 10000;
 	int amount = 100;
 
-	EXPECT_CALL(mockdriver, Sell).Times(1));
+	EXPECT_CALL(mockdriver, GetPrice).Times(1)).WillRepeatedly(Return(price));;
 
 	ats.selectStockBrocker(&mockdriver);
 	int result = ats.GetPrice("STOCKCODE");
