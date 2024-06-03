@@ -91,7 +91,6 @@ TEST_F(TradingSystemFixture, TestAtsSell) {
 	ats.Sell("STOCKCODE", price, amount);
 }
 
-
 TEST_F(TradingSystemFixture, TestAtsGetPrice10000) {
 	int price = 10000;
 	int amount = 100;
@@ -102,4 +101,24 @@ TEST_F(TradingSystemFixture, TestAtsGetPrice10000) {
 	int result = ats.GetPrice("STOCKCODE");
 
 	EXPECT_THAT(result, testing::Eq(price));
+}
+
+TEST_F(TradingSystemFixture, TestAtsbuyNiceTiming) {
+	int price = 10000;
+	int goalPrice = 10300;
+
+	EXPECT_CALL(mockdriver, GetPrice).Times(3)).WillOnce(Return(price + 100)).WillOnce(Return(price + 200)).WillOnce(Return(goalPrice));
+
+	ats.selectStockBrocker(&mockdriver);
+	ats.buyNiceTiming("STOCKCODE", goalPrice);
+}
+
+TEST_F(TradingSystemFixture, TestAtsSellNiceTiming) {
+	int price = 10300;
+	int amount = 100;
+
+	EXPECT_CALL(mockdriver, GetPrice).Times(3)).WillOnce(Return(price - 100)).WillOnce(Return(price - 200)).WillOnce(Return(price - 300));
+
+	ats.selectStockBrocker(&mockdriver);
+	ats.sellNiceTiming("STOCKCODE", amount);
 }
